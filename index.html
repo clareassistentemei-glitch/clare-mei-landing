@@ -4,17 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clarê — Seu MEI em dia, pelo WhatsApp</title>
-  <meta name="description" content="A Clarê cuida das suas obrigações de MEI pelo WhatsApp. Declaração mensal, DAS e declaração anual, tudo resolvido automaticamente. 30 dias grátis." />
+  <meta name="description" content="A Clarê cuida das suas obrigações de MEI pelo WhatsApp. Declaração mensal, boleto do DAS gerado automaticamente e declaração anual. 30 dias grátis, sem cartão." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Clarê — Seu MEI em dia, pelo WhatsApp" />
+  <meta property="og:description" content="Declaração mensal feita por você em 2 minutos e boleto do DAS entregue pronto no seu WhatsApp. Teste 30 dias grátis." />
+  <meta property="og:url" content="https://claremei.com.br" />
+  <meta property="og:locale" content="pt_BR" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231BA882'/%3E%3Cpath d='M44 32c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12c2.21 0 4.28.598 6.056 1.64' stroke='white' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='46' cy='20' r='3' fill='%23F5A623'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Preciso baixar algum aplicativo?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A Clarê funciona 100% dentro do WhatsApp que você já usa. É só salvar o número e mandar um Oi."}},
+      {"@type": "Question", "name": "A Clarê é confiável? Meus dados estão seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A Clarê usa seus dados (nome, CNPJ e faturamento informado) apenas para cumprir suas obrigações de MEI. Nada é vendido ou compartilhado."}},
+      {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "R$5,90 por mês — o preço de um cafezinho — com 30 dias grátis para testar, sem cadastrar cartão."}},
+      {"@type": "Question", "name": "Posso cancelar quando quiser?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Sem fidelidade, sem multa. É só avisar a Clarê no próprio WhatsApp."}}
+    ]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --teal:        #1BA882;
       --teal-dark:   #0F7360;
+      --teal-deep:   #0A5748;
       --teal-light:  #E1F5EE;
       --amber:       #F5A623;
       --amber-light: #FEF3DC;
@@ -23,6 +41,10 @@
       --gray:        #6B7280;
       --border:      #E5E7EB;
       --white:       #FFFFFF;
+      --wa-green:    #25D366;
+      --chat-bg:     #EFEAE2;
+      --bubble-in:   #FFFFFF;
+      --bubble-out:  #D9FDD3;
     }
 
     html { scroll-behavior: smooth; }
@@ -33,6 +55,15 @@
       color: var(--dark);
       line-height: 1.6;
       font-size: 16px;
+    }
+
+    h1, h2, h3, .nav-logo-text, .price-main { font-family: 'Sora', 'Inter', sans-serif; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
 
     /* NAV */
@@ -50,207 +81,247 @@
       height: 60px;
     }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 
     .nav-logo-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+      width: 34px; height: 34px; border-radius: 50%;
       background: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .nav-logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 1px;
+    .nav-logo-text { font-size: 18px; font-weight: 700; color: var(--dark); letter-spacing: 1px; }
+
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+
+    .nav-links a.nav-anchor {
+      font-size: 14px; font-weight: 500; color: var(--gray);
+      text-decoration: none; transition: color .2s;
     }
+    .nav-links a.nav-anchor:hover { color: var(--teal-dark); }
+    @media (max-width: 640px) { .nav-links a.nav-anchor { display: none; } }
 
     .nav-cta {
-      background: var(--teal);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 9px 20px;
-      border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--teal); color: var(--white);
+      text-decoration: none; font-size: 14px; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
       transition: background 0.2s, box-shadow 0.2s;
       white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(27,168,130,0.3);
+      box-shadow: 0 4px 16px rgba(27,168,130,0.35);
     }
-    .nav-cta:hover { background: var(--teal-dark); box-shadow: 0 4px 16px rgba(27,168,130,0.4); }
+    .nav-cta:hover { background: var(--teal-dark); box-shadow: 0 6px 20px rgba(27,168,130,0.45); }
 
     /* HERO */
     .hero {
-      background: linear-gradient(160deg, #0f7360 0%, #1BA882 55%, #2cc99b 100%);
+      background:
+        radial-gradient(ellipse 80% 60% at 85% 10%, rgba(245,166,35,0.18), transparent 60%),
+        linear-gradient(160deg, #0A5748 0%, #0F7360 40%, #1BA882 100%);
       color: var(--white);
-      text-align: center;
-      padding: 5rem 1.5rem 4rem;
+      padding: 4.5rem 1.5rem 4rem;
       position: relative;
       overflow: hidden;
     }
 
     .hero::before {
       content: '';
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
+      position: absolute; width: 560px; height: 560px; border-radius: 50%;
       background: rgba(255,255,255,0.04);
-      top: -160px;
-      right: -120px;
+      top: -180px; right: -140px;
     }
-
     .hero::after {
       content: '';
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
+      position: absolute; width: 340px; height: 340px; border-radius: 50%;
       background: rgba(255,255,255,0.04);
-      bottom: -100px;
-      left: -80px;
+      bottom: -120px; left: -90px;
+    }
+
+    .hero-inner {
+      max-width: 1020px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .hero-cta-group { align-items: center; }
+      .hero-copy p { margin-left: auto; margin-right: auto; }
     }
 
     .hero-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.14);
       border: 1px solid rgba(255,255,255,0.3);
       color: var(--white);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 5px 14px;
-      border-radius: 999px;
+      font-size: 13px; font-weight: 500;
+      padding: 5px 14px; border-radius: 999px;
       margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      max-width: 640px;
-      margin: 0 auto 1.25rem;
+      font-size: clamp(2rem, 5.4vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
       letter-spacing: -0.5px;
     }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--amber);
-    }
+    .hero h1 em { font-style: normal; color: var(--amber); }
 
-    .hero p {
+    .hero-copy p {
       font-size: clamp(1rem, 3vw, 1.125rem);
       color: rgba(255,255,255,0.85);
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
+      max-width: 480px;
+      margin-bottom: 2rem;
     }
 
-    .hero-cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
+    .hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--white);
-      color: var(--teal-dark);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 28px;
-      border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--teal-dark);
+      text-decoration: none; font-size: 16px; font-weight: 700;
+      padding: 15px 30px; border-radius: 999px;
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.25); }
     .btn-primary svg { flex-shrink: 0; }
 
-    .hero-cta-note {
-      font-size: 13px;
-      color: rgba(255,255,255,0.65);
+    .hero-cta-note { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+    .hero-number { margin-top: 1.25rem; font-size: 14px; color: rgba(255,255,255,0.55); }
+    .hero-number strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* PHONE MOCKUP */
+    .phone {
+      background: #111b21;
+      border-radius: 36px;
+      padding: 10px;
+      max-width: 340px;
+      margin: 0 auto;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2);
+      transform: rotate(1.5deg);
+    }
+    @media (max-width: 860px) { .phone { transform: none; max-width: 320px; } }
+
+    .phone-screen { background: var(--chat-bg); border-radius: 28px; overflow: hidden; }
+
+    .chat-header {
+      background: #0F7360;
+      color: var(--white);
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
     }
 
-    .hero-number {
-      margin-top: 3rem;
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
+    .chat-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.35);
     }
-    .hero-number strong {
-      color: rgba(255,255,255,0.85);
+
+    .chat-title { font-size: 14px; font-weight: 700; line-height: 1.2; }
+    .chat-status { font-size: 11px; color: rgba(255,255,255,0.75); }
+
+    .chat-body { padding: 14px 12px 18px; display: flex; flex-direction: column; gap: 8px; }
+
+    .bubble {
+      max-width: 85%;
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+      position: relative;
+      color: var(--dark);
+    }
+
+    .bubble-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-top: 8px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .bubble-buttons span {
+      text-align: center;
+      color: var(--teal-dark);
       font-weight: 600;
+      font-size: 13px;
+      padding: 8px 4px 2px;
     }
+
+    .bubble-buttons span + span {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin-top: 6px;
+    }
+
+    .bubble .time {
+      display: block; text-align: right;
+      font-size: 10px; color: rgba(0,0,0,0.4);
+      margin-top: 3px;
+    }
+
+    .bubble-in  { background: var(--bubble-in);  align-self: flex-start; border-top-left-radius: 4px; }
+    .bubble-out { background: var(--bubble-out); align-self: flex-end;   border-top-right-radius: 4px; }
+
+    .bubble-doc {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(15,115,96,0.08);
+      border: 1px solid rgba(15,115,96,0.2);
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-top: 6px;
+    }
+
+    .bubble-doc .doc-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: #E53E3E;
+      color: #fff; font-size: 9px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bubble-doc .doc-name { font-size: 12px; font-weight: 600; color: var(--dark); line-height: 1.3; }
+    .bubble-doc .doc-meta { font-size: 10px; color: var(--gray); }
 
     /* SECTION BASE */
     section { padding: 5rem 1.5rem; }
 
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-    }
+    .container { max-width: 760px; margin: 0 auto; }
 
     .section-header { margin-bottom: 2.5rem; }
 
     .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--teal);
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--teal);
       margin-bottom: 0.875rem;
     }
 
     .section-label::before {
       content: '';
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: var(--teal);
-      border-radius: 2px;
-      flex-shrink: 0;
+      display: inline-block; width: 20px; height: 2px;
+      background: var(--teal); border-radius: 2px; flex-shrink: 0;
     }
 
     .section-title {
       font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: 700;
-      line-height: 1.25;
-      color: var(--dark);
-      margin-bottom: 0.875rem;
+      font-weight: 700; line-height: 1.25;
+      color: var(--dark); margin-bottom: 0.875rem;
       letter-spacing: -0.3px;
     }
 
-    .section-sub {
-      font-size: 1rem;
-      color: var(--gray);
-      max-width: 580px;
-      line-height: 1.65;
-    }
+    .section-sub { font-size: 1rem; color: var(--gray); max-width: 580px; line-height: 1.65; }
 
     /* OBRIGAÇÕES */
-    .obrigacoes {
-      background: var(--white);
-      border-top: 3px solid var(--teal-light);
-    }
+    .obrigacoes { background: var(--white); border-top: 3px solid var(--teal-light); }
 
     .obrig-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1rem;
-      margin-top: 2.5rem;
+      gap: 1.5rem; margin-top: 2.5rem;
     }
 
     .obrig-card {
@@ -258,49 +329,35 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
       box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .obrig-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+    .obrig-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
 
     .obrig-icon {
-      font-size: 28px;
-      line-height: 1;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal-light);
+      font-size: 22px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .obrig-card h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.3;
-    }
+    .obrig-card h3 { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.3; }
 
-    .obrig-desc {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.55;
-    }
+    .obrig-desc { font-size: 14px; color: var(--gray); line-height: 1.55; flex: 1; }
 
     .obrig-benefit {
       background: var(--teal-light);
       border-radius: 10px;
       padding: 10px 12px;
-      font-size: 13px;
-      color: var(--teal-dark);
-      line-height: 1.5;
+      font-size: 13px; color: var(--teal-dark); line-height: 1.5;
+      min-height: 96px;
     }
 
     .obrig-benefit .benefit-label {
-      display: block;
-      font-weight: 700;
-      font-size: 11px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 4px;
+      display: block; font-weight: 700; font-size: 11px;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 4px;
     }
 
     .obrig-warn {
@@ -309,50 +366,41 @@
       border-left: 3px solid var(--amber);
       border-radius: 8px;
       padding: 8px 12px;
-      font-size: 13px;
-      color: #7a5600;
-      line-height: 1.5;
+      font-size: 13px; color: #7a5600; line-height: 1.5;
+      min-height: 84px;
     }
 
-    .obrig-warn::before {
-      content: "Sem fazer: ";
-      font-weight: 700;
-    }
+    .obrig-warn::before { content: "Sem fazer: "; font-weight: 700; }
 
     /* PROBLEMA */
-    .problema {
-      background: var(--cream);
-      border-top: 1px solid var(--border);
-    }
+    .problema { background: var(--cream); border-top: 1px solid var(--border); }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2.5rem;
+      gap: 1.5rem; margin-top: 2.5rem;
     }
 
     .stat-card {
       background: var(--white);
       border: 1px solid var(--border);
+      border-top: 3px solid var(--teal-light);
       border-radius: 16px;
       padding: 1.5rem;
       box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
 
+    .stat-card.stat-warn { border-top-color: var(--amber); }
+
     .stat-num {
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: var(--teal);
-      line-height: 1;
-      margin-bottom: 0.5rem;
+      font-family: 'Sora', sans-serif;
+      font-size: 2.25rem; font-weight: 700;
+      color: var(--teal); line-height: 1; margin-bottom: 0.5rem;
     }
 
-    .stat-desc {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.5;
-    }
+    .stat-card.stat-warn .stat-num { color: var(--amber); }
+
+    .stat-desc { font-size: 14px; color: var(--gray); line-height: 1.5; }
 
     .consequence-box {
       margin-top: 2rem;
@@ -363,144 +411,65 @@
       padding: 1.25rem 1.5rem;
     }
 
-    .consequence-box .warn-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #5c3f00;
-      margin-bottom: 10px;
-    }
+    .consequence-box .warn-title { font-size: 14px; font-weight: 700; color: #5c3f00; margin-bottom: 10px; }
 
-    .consequence-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .consequence-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 
     .consequence-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 14px;
-      color: #7a5600;
-      line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 14px; color: #7a5600; line-height: 1.5;
     }
 
     .consequence-list li::before {
       content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--amber);
-      margin-top: 7px;
-      flex-shrink: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--amber); margin-top: 7px; flex-shrink: 0;
     }
 
     /* COMO FUNCIONA */
-    .como-funciona {
-      background: var(--white);
-      border-top: 3px solid var(--teal-light);
-    }
+    .como-funciona { background: var(--white); border-top: 3px solid var(--teal-light); }
 
-    .steps {
-      margin-top: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .steps { margin-top: 2.5rem; display: flex; flex-direction: column; }
 
-    .step {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      position: relative;
-    }
+    .step { display: flex; gap: 1rem; align-items: flex-start; position: relative; }
 
-    .step-left {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      width: 40px;
-    }
+    .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 44px; }
 
     .step-num {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--teal);
-      color: var(--white);
-      font-size: 17px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      z-index: 1;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--teal); color: var(--white);
+      font-size: 17px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; z-index: 1;
       box-shadow: 0 3px 12px rgba(27,168,130,0.3);
     }
 
-    .step-line {
-      width: 2px;
-      flex: 1;
-      min-height: 24px;
-      background: var(--teal-light);
-      margin: 4px 0;
-    }
+    .step-line { width: 2px; flex: 1; min-height: 24px; background: var(--teal-light); margin: 4px 0; }
 
-    .step-content {
-      padding-bottom: 2rem;
-      padding-top: 8px;
-      flex: 1;
-    }
+    .step-content { padding-bottom: 2rem; padding-top: 8px; flex: 1; }
 
-    .step-content h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
+    .step-content h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; line-height: 1.3; }
 
-    .step-content p {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.65;
-    }
+    .step-content p { font-size: 14px; color: var(--gray); line-height: 1.65; }
 
     .step-tag {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--teal);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--teal);
       background: var(--teal-light);
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-bottom: 6px;
+      padding: 3px 10px; border-radius: 999px; margin-bottom: 6px;
     }
 
     .step-future {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      color: var(--amber);
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--amber);
       background: var(--amber-light);
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-top: 8px;
-      font-weight: 500;
+      padding: 3px 10px; border-radius: 999px;
+      margin-top: 8px; font-weight: 500;
     }
 
     /* PREÇO */
-    .preco {
-      background: var(--cream);
-      border-top: 1px solid var(--border);
-    }
+    .preco { background: var(--cream); border-top: 1px solid var(--border); }
 
     .preco-card {
       background: var(--white);
@@ -516,80 +485,52 @@
 
     .trial-badge {
       display: inline-block;
-      background: var(--teal-light);
-      color: var(--teal-dark);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 999px;
+      background: var(--teal-light); color: var(--teal-dark);
+      font-size: 13px; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px;
       margin-bottom: 1.5rem;
     }
 
     .price-display { margin-bottom: 1.5rem; }
 
-    .price-display .price-main {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1;
-    }
+    .price-display .price-main { font-size: 3rem; font-weight: 700; color: var(--dark); line-height: 1; }
 
-    .price-display .price-period {
-      font-size: 16px;
-      color: var(--gray);
-      font-weight: 400;
-    }
+    .price-display .price-period { font-size: 16px; color: var(--gray); font-weight: 400; }
 
     .price-display .price-trial {
-      display: block;
-      font-size: 14px;
-      color: var(--teal);
-      font-weight: 500;
-      margin-top: 6px;
+      display: block; font-size: 14px; color: var(--teal);
+      font-weight: 500; margin-top: 6px;
     }
+
+    .price-compare {
+      display: block;
+      font-size: 13px; color: var(--gray);
+      margin-top: 8px;
+    }
+    .price-compare strong { color: var(--dark); }
 
     .preco-items {
-      list-style: none;
-      text-align: left;
+      list-style: none; text-align: left;
       margin: 1.5rem 0 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: flex; flex-direction: column; gap: 10px;
     }
 
-    .preco-items li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--dark);
-    }
+    .preco-items li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--dark); }
 
     .preco-items li::before {
       content: '';
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
+      width: 20px; height: 20px; border-radius: 50%;
       background: var(--teal-light);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%230F7360' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
+      background-repeat: no-repeat; background-position: center;
       flex-shrink: 0;
     }
 
     .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--teal);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 15px 28px;
-      border-radius: 999px;
-      width: 100%;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--teal); color: var(--white);
+      text-decoration: none; font-size: 16px; font-weight: 700;
+      padding: 15px 28px; border-radius: 999px; width: 100%;
       transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
       box-shadow: 0 4px 16px rgba(27,168,130,0.35);
     }
@@ -599,15 +540,46 @@
       box-shadow: 0 8px 24px rgba(27,168,130,0.4);
     }
 
-    .preco-note {
-      font-size: 12px;
-      color: var(--gray);
-      margin-top: 12px;
+    .preco-note { font-size: 12px; color: var(--gray); margin-top: 12px; }
+
+    /* FAQ */
+    .faq { background: var(--white); border-top: 3px solid var(--teal-light); }
+
+    .faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow .2s;
     }
+    .faq-item[open] { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      font-size: 15px; font-weight: 600; color: var(--dark);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 20px; font-weight: 400; color: var(--teal);
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+
+    .faq-answer { padding: 0 1.25rem 1.25rem; font-size: 14px; color: var(--gray); line-height: 1.65; }
 
     /* CTA FINAL */
     .cta-final {
-      background: linear-gradient(160deg, #0f7360 0%, #1BA882 60%, #2cc99b 100%);
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 90%, rgba(245,166,35,0.15), transparent 60%),
+        linear-gradient(160deg, #0A5748 0%, #0F7360 45%, #1BA882 100%);
       color: var(--white);
       text-align: center;
       padding: 5rem 1.5rem;
@@ -621,33 +593,19 @@
       line-height: 1.25;
     }
 
-    .cta-final p {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 2rem;
-    }
+    .cta-final p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; }
 
     .btn-final {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--white);
-      color: var(--teal-dark);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 999px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); color: var(--teal-dark);
+      text-decoration: none; font-size: 16px; font-weight: 700;
+      padding: 14px 32px; border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
       transition: transform 0.15s, box-shadow 0.15s;
     }
-    .btn-final:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    .btn-final:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.28); }
 
-    .cta-number {
-      margin-top: 1.5rem;
-      font-size: 14px;
-      color: rgba(255,255,255,0.6);
-    }
+    .cta-number { margin-top: 1.5rem; font-size: 14px; color: rgba(255,255,255,0.6); }
 
     /* FOOTER */
     footer {
@@ -663,16 +621,10 @@
     /* FLOATING WHATSAPP */
     .float-wa {
       position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 200;
-      background: #25D366;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: var(--wa-green);
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 20px rgba(37,211,102,0.4);
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
@@ -680,7 +632,7 @@
     .float-wa:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
 
     @media (max-width: 480px) {
-      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .hero { padding: 3rem 1.25rem 3rem; }
       section { padding: 3rem 1.25rem; }
       .preco-card { padding: 2rem 1.25rem; }
     }
@@ -698,36 +650,99 @@
       </div>
       <span class="nav-logo-text">CLARÊ</span>
     </a>
-    <a href="https://wa.me/5521966850677?text=Oi!" class="nav-cta" target="_blank" rel="noopener">Começar grátis</a>
+    <div class="nav-links">
+      <a href="#como-funciona" class="nav-anchor">Como funciona</a>
+      <a href="#preco" class="nav-anchor">Preço</a>
+      <a href="#faq" class="nav-anchor">Dúvidas</a>
+      <a href="https://wa.me/5521966850677?text=Oi!" class="nav-cta" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Começar grátis
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">✦ 30 dias grátis, sem cartão</div>
-    <h1>Nunca mais pague <em>multa</em> por esquecer o MEI</h1>
-    <p>A Clarê cuida das suas obrigações de MEI pelo WhatsApp. Ela te avisa, te guia e faz a declaração por você.</p>
-    <div class="hero-cta-group">
-      <a href="https://wa.me/5521966850677?text=Oi!" class="btn-primary" target="_blank" rel="noopener">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        Começar grátis no WhatsApp
-      </a>
-      <span class="hero-cta-note">Teste por 30 dias, sem precisar cadastrar cartão</span>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge">✦ 30 dias grátis, sem cartão</div>
+        <h1>Nunca mais pague <em>multa</em> por esquecer o MEI</h1>
+        <p>A Clarê cuida das suas obrigações de MEI pelo WhatsApp. Ela te avisa, faz a declaração mensal e entrega o boleto do DAS pronto para pagar.</p>
+        <div class="hero-cta-group">
+          <a href="https://wa.me/5521966850677?text=Oi!" class="btn-primary" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0F7360" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Começar grátis no WhatsApp
+          </a>
+          <span class="hero-cta-note">Teste por 30 dias, sem precisar cadastrar cartão</span>
+        </div>
+        <p class="hero-number">Número: <strong>(21) 96685-0677</strong></p>
+      </div>
+
+      <div class="phone" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="chat-header">
+            <div class="chat-avatar">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M14 7.5 A6 6 0 1 0 14 12.5" stroke="white" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div>
+              <div class="chat-title">Clarê MEI</div>
+              <div class="chat-status">online</div>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="bubble bubble-in">
+              Como você prefere pagar o DAS, Ronaldo? 😊
+              <div class="bubble-buttons">
+                <span>Ver passo a passo</span>
+                <span>Me manda o boleto</span>
+              </div>
+              <span class="time">09:01</span>
+            </div>
+            <div class="bubble bubble-out">
+              Me manda o boleto
+              <span class="time">09:01</span>
+            </div>
+            <div class="bubble bubble-in">
+              ⏳ Vou gerar seu DAS agora! Pode levar até 1 minutinho 😊
+              <span class="time">09:01</span>
+            </div>
+            <div class="bubble bubble-in">
+              <div class="bubble-doc" style="margin-top:0; margin-bottom:6px;">
+                <div class="doc-icon">PDF</div>
+                <div>
+                  <div class="doc-name">DAS_07-2026.pdf</div>
+                  <div class="doc-meta">PDF · 154 KB</div>
+                </div>
+              </div>
+              Seu DAS de julho/2026 👆 Vence dia 20. Pague pelo app do seu banco!
+              <span class="time">09:02</span>
+            </div>
+            <div class="bubble bubble-out">
+              Paguei ✅
+              <span class="time">09:15</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="hero-number">Número: <strong>(21) 96685-0677</strong></p>
   </section>
 
   <!-- OBRIGAÇÕES -->
   <section class="obrigacoes">
     <div class="container">
-      <p class="section-label">Suas obrigações como MEI</p>
-      <h2 class="section-title">Ser MEI tem 3 obrigações com o governo</h2>
-      <p class="section-sub">Muita gente acha que é só pagar o boleto. Mas não é. Veja o que precisa ser feito todo mês e todo ano para o seu MEI ficar em dia.</p>
+      <p class="section-label reveal">Suas obrigações como MEI</p>
+      <h2 class="section-title reveal">Ser MEI tem 3 obrigações com o governo</h2>
+      <p class="section-sub reveal">Muita gente acha que é só pagar o boleto. Mas não é. Veja o que precisa ser feito todo mês e todo ano para o seu MEI ficar em dia.</p>
 
       <div class="obrig-grid">
 
-        <div class="obrig-card">
+        <div class="obrig-card reveal">
           <div class="obrig-icon">📊</div>
           <h3>Declaração Mensal de Faturamento</h3>
           <p class="obrig-desc">Todo mês, até o dia 10, você informa ao governo quanto faturou. Mesmo que não tenha faturado nada no mês.</p>
@@ -740,7 +755,7 @@
           </div>
         </div>
 
-        <div class="obrig-card">
+        <div class="obrig-card reveal">
           <div class="obrig-icon">💰</div>
           <h3>DAS (Boleto mensal do MEI)</h3>
           <p class="obrig-desc">Um valor fixo mensal que mantém o seu MEI ativo e seus direitos garantidos. Vence todo dia 20.</p>
@@ -753,7 +768,7 @@
           </div>
         </div>
 
-        <div class="obrig-card">
+        <div class="obrig-card reveal">
           <div class="obrig-icon">📋</div>
           <h3>Declaração Anual (DASN-SIMEI)</h3>
           <p class="obrig-desc">Uma vez por ano, até 31 de maio, você declara o total que faturou no ano anterior para a Receita Federal.</p>
@@ -773,26 +788,26 @@
   <!-- PROBLEMA -->
   <section class="problema">
     <div class="container">
-      <p class="section-label">O problema</p>
-      <h2 class="section-title">A maioria dos MEIs não está conseguindo cumprir</h2>
-      <p class="section-sub">Não é falta de vontade. É que ninguém avisa, ninguém explica e o processo não é simples.</p>
+      <p class="section-label reveal">O problema</p>
+      <h2 class="section-title reveal">A maioria dos MEIs não está conseguindo cumprir</h2>
+      <p class="section-sub reveal">Não é falta de vontade. É que ninguém avisa, ninguém explica e o processo não é simples.</p>
 
       <div class="stats-grid">
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="stat-num">40%</div>
           <p class="stat-desc">dos MEIs no Brasil estão inadimplentes. Recorde histórico em 2025.</p>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-warn reveal">
           <div class="stat-num">49%</div>
           <p class="stat-desc">dos MEIs não sabem o que acontece quando param de pagar o DAS (boleto mensal do MEI).</p>
         </div>
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="stat-num">87%</div>
           <p class="stat-desc">esquecem de fazer a declaração anual dentro do prazo.</p>
         </div>
       </div>
 
-      <div class="consequence-box">
+      <div class="consequence-box reveal">
         <p class="warn-title">Quem atrasa ou esquece enfrenta:</p>
         <ul class="consequence-list">
           <li>Multa e juros sobre o valor atrasado do DAS</li>
@@ -805,15 +820,15 @@
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section class="como-funciona">
+  <section class="como-funciona" id="como-funciona">
     <div class="container">
-      <p class="section-label">Como funciona</p>
-      <h2 class="section-title">Simples como mandar uma mensagem</h2>
-      <p class="section-sub">Sem baixar aplicativo, sem entrar em site do governo. A Clarê cuida de tudo pelo WhatsApp que você já usa.</p>
+      <p class="section-label reveal">Como funciona</p>
+      <h2 class="section-title reveal">Simples como mandar uma mensagem</h2>
+      <p class="section-sub reveal">Sem baixar aplicativo, sem entrar em site do governo. A Clarê cuida de tudo pelo WhatsApp que você já usa.</p>
 
       <div class="steps">
 
-        <div class="step">
+        <div class="step reveal">
           <div class="step-left">
             <div class="step-num">1</div>
             <div class="step-line"></div>
@@ -824,7 +839,7 @@
           </div>
         </div>
 
-        <div class="step">
+        <div class="step reveal">
           <div class="step-left">
             <div class="step-num">2</div>
             <div class="step-line"></div>
@@ -835,7 +850,7 @@
           </div>
         </div>
 
-        <div class="step">
+        <div class="step reveal">
           <div class="step-left">
             <div class="step-num">3</div>
             <div class="step-line"></div>
@@ -847,7 +862,7 @@
           </div>
         </div>
 
-        <div class="step">
+        <div class="step reveal">
           <div class="step-left">
             <div class="step-num">4</div>
             <div class="step-line"></div>
@@ -860,9 +875,10 @@
           </div>
         </div>
 
-        <div class="step">
+        <div class="step reveal">
           <div class="step-left">
             <div class="step-num">5</div>
+            <div class="step-line"></div>
           </div>
           <div class="step-content">
             <span class="step-tag">Declaração anual</span>
@@ -872,29 +888,42 @@
           </div>
         </div>
 
+        <div class="step reveal">
+          <div class="step-left">
+            <div class="step-num">6</div>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Atendimento</span>
+            <h3>Tem dúvida? É só perguntar</h3>
+            <p>A qualquer momento, pergunte sobre suas obrigações de MEI direto no WhatsApp. Se a Clarê não souber responder na hora, ela chama o time por trás dela para te ajudar.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- PREÇO -->
-  <section class="preco">
+  <section class="preco" id="preco">
     <div class="container">
-      <p class="section-label" style="text-align:center;">Preço</p>
-      <h2 class="section-title" style="text-align:center;">Menos que um café por mês</h2>
-      <p class="section-sub" style="text-align:center; margin: 0 auto;">Teste por 30 dias de graça antes de pagar qualquer coisa.</p>
+      <p class="section-label reveal" style="text-align:center;">Preço</p>
+      <h2 class="section-title reveal" style="text-align:center;">O preço de um cafezinho por mês</h2>
+      <p class="section-sub reveal" style="text-align:center; margin: 0 auto;">Teste por 30 dias de graça antes de pagar qualquer coisa.</p>
 
-      <div class="preco-card">
+      <div class="preco-card reveal">
         <span class="trial-badge">✦ 30 dias grátis para começar</span>
         <div class="price-display">
-          <span class="price-main">R$2,50</span>
+          <span class="price-main">R$5,90</span>
           <span class="price-period">/mês</span>
           <span class="price-trial">Primeiro mês gratuito, sem cadastrar cartão</span>
+          <span class="price-compare">Uma única multa por atraso pode custar <strong>mais que meses de Clarê</strong>.</span>
         </div>
         <ul class="preco-items">
           <li>Declaração mensal feita pela Clarê</li>
           <li>Boleto do DAS gerado automaticamente todo mês</li>
           <li>Lembrete e orientação da declaração anual (DASN-SIMEI)</li>
           <li>Relatório de faturamento em PDF</li>
+          <li>Tire dúvidas sobre o MEI a qualquer momento</li>
           <li>Tudo pelo WhatsApp, sem sair do app</li>
         </ul>
         <a href="https://wa.me/5521966850677?text=Oi!" class="btn-whatsapp" target="_blank" rel="noopener">
@@ -904,6 +933,48 @@
           Quero testar grátis
         </a>
         <p class="preco-note">Sem cartão. Sem compromisso. Depois de 30 dias a Clarê te pergunta se foi útil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <p class="section-label reveal">Dúvidas comuns</p>
+      <h2 class="section-title reveal">Perguntas que todo mundo faz</h2>
+
+      <div class="faq-list">
+
+        <details class="faq-item reveal">
+          <summary>Preciso baixar algum aplicativo?</summary>
+          <p class="faq-answer">Não. A Clarê funciona 100% dentro do WhatsApp que você já usa. É só salvar o número (21) 96685-0677 e mandar um "Oi".</p>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>A Clarê é confiável? Meus dados estão seguros?</summary>
+          <p class="faq-answer">Sim. A Clarê usa seus dados (nome, CNPJ e o faturamento que você informa) apenas para cuidar das suas obrigações de MEI. Nada é vendido nem compartilhado com terceiros.</p>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>A Clarê serve para qualquer MEI?</summary>
+          <p class="faq-answer">Sim. Serviço, comércio ou indústria — as obrigações são as mesmas e a Clarê cuida de todas. No cadastro ela pergunta sua categoria para personalizar a ajuda.</p>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Como funciona o pagamento da Clarê?</summary>
+          <p class="faq-answer">Os primeiros 30 dias são grátis, sem cadastrar cartão. Depois, a Clarê pergunta se foi útil e combina com você o pagamento de R$5,90 por mês — o preço de um cafezinho — direto no WhatsApp.</p>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Posso cancelar quando quiser?</summary>
+          <p class="faq-answer">Pode. Sem fidelidade, sem multa, sem burocracia. É só avisar a Clarê na própria conversa.</p>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>E se eu já estiver com o MEI atrasado?</summary>
+          <p class="faq-answer">A Clarê te orienta a regularizar. Ela avisa quando há débitos antigos e te indica o caminho oficial para parcelar e voltar a ficar em dia.</p>
+        </details>
+
       </div>
     </div>
   </section>
@@ -935,6 +1006,25 @@
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </a>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
