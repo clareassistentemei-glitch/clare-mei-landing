@@ -638,6 +638,126 @@
       section { padding: 3rem 1.25rem; }
       .preco-card { padding: 2rem 1.25rem; }
     }
+
+    /* ── COMPARAÇÃO CONCORRENTES ──────────────────────────── */
+    .compare-section { margin: 2.75rem 0 2.5rem; }
+
+    .compare-intro {
+      text-align: center;
+      font-size: 13px; color: var(--gray);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-clare-card { order: -1; }
+    }
+
+    .compare-card {
+      border-radius: 20px;
+      padding: 1.5rem 1.2rem;
+      position: relative;
+    }
+
+    .compare-other {
+      background: var(--cream);
+      border: 1px solid var(--border);
+    }
+
+    .compare-clare-card {
+      background: var(--white);
+      border: 2.5px solid var(--teal);
+      box-shadow: 0 12px 40px rgba(27,168,130,0.16);
+      padding-top: 2.5rem;
+    }
+
+    .compare-best-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--teal);
+      color: var(--white);
+      font-size: 12px; font-weight: 700;
+      padding: 5px 18px; border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(27,168,130,0.35);
+    }
+
+    .compare-card-name {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--gray);
+      margin-bottom: 5px; display: block;
+    }
+    .compare-clare-card .compare-card-name { color: var(--teal); }
+
+    .compare-card-price {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--dark); line-height: 1;
+      margin-bottom: 2px;
+    }
+    .compare-card-price span {
+      font-size: 13px; font-weight: 400;
+      color: var(--gray); font-family: 'Inter', sans-serif;
+    }
+    .compare-clare-card .compare-card-price { color: var(--teal-dark); }
+
+    .compare-card-sub {
+      font-size: 12px; color: var(--gray);
+      display: block; margin-bottom: 1.1rem; line-height: 1.4;
+    }
+    .compare-clare-card .compare-card-sub { color: var(--teal); font-weight: 500; }
+
+    .compare-divider { height: 1px; background: var(--border); margin: 0.75rem 0; }
+
+    .compare-section-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--gray); margin-bottom: 0.6rem; display: block;
+    }
+    .compare-clare-card .compare-section-label { color: var(--teal); }
+
+    .compare-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+
+    .compare-list li {
+      font-size: 12.5px; line-height: 1.4;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 6px; padding: 6px 8px; border-radius: 8px;
+    }
+
+    .li-extra {
+      background: rgba(245,166,35,0.07);
+      color: #5c3f00;
+    }
+    .li-extra .extra-price {
+      font-weight: 700; color: #9a5c00;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    .li-clare {
+      background: var(--teal-light);
+      color: var(--teal-dark); font-weight: 500;
+    }
+
+    .li-no-extra {
+      background: var(--teal);
+      color: var(--white); font-weight: 600;
+      justify-content: center; text-align: center;
+      border-radius: 10px; margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -912,13 +1032,69 @@
       <h2 class="section-title reveal" style="text-align:center;">O preço de um cafezinho por mês</h2>
       <p class="section-sub reveal" style="text-align:center; margin: 0 auto;">Teste por 30 dias de graça antes de pagar qualquer coisa.</p>
 
+      <!-- COMPARAÇÃO CONCORRENTES -->
+      <div class="compare-section reveal">
+        <p class="compare-intro">Compare com as outras opções do mercado</p>
+        <div class="compare-grid">
+
+          <!-- Concorrente 1 -->
+          <div class="compare-card compare-other">
+            <span class="compare-card-name">Concorrente 1</span>
+            <div class="compare-card-price">R$29,90<span>/mês</span></div>
+            <span class="compare-card-sub">+ cobranças avulsas</span>
+            <div class="compare-divider"></div>
+            <span class="compare-section-label">Serviços avulsos cobrados à parte</span>
+            <ul class="compare-list">
+              <li class="li-extra">Declaração anual (DASN) <span class="extra-price">+ R$65</span></li>
+              <li class="li-extra">Suporte especialista <span class="extra-price">+ R$150</span></li>
+              <li class="li-extra">Diagnóstico do MEI <span class="extra-price">+ R$15</span></li>
+              <li class="li-extra">Endereço virtual <span class="extra-price">+ R$40</span></li>
+              <li class="li-extra">Parcelamento de dívidas <span class="extra-price">+ R$149</span></li>
+            </ul>
+          </div>
+
+          <!-- Clarê (destaque central) -->
+          <div class="compare-card compare-clare-card">
+            <div class="compare-best-badge">✦ Melhor escolha</div>
+            <span class="compare-card-name">Clarê</span>
+            <div class="compare-card-price">R$5,90<span>/mês</span></div>
+            <span class="compare-card-sub">Direto no WhatsApp. Sem surpresas.</span>
+            <div class="compare-divider"></div>
+            <span class="compare-section-label">Tudo incluído, sem cobranças à parte</span>
+            <ul class="compare-list">
+              <li class="li-clare">✓ Boleto DAS gerado todo mês</li>
+              <li class="li-clare">✓ Declaração mensal feita por você</li>
+              <li class="li-clare">✓ Lembretes D-5, D-1 e D-day</li>
+              <li class="li-clare">✓ Suporte a dúvidas sobre MEI</li>
+              <li class="li-no-extra">Zero cobranças avulsas</li>
+            </ul>
+          </div>
+
+          <!-- Concorrente 2 -->
+          <div class="compare-card compare-other">
+            <span class="compare-card-name">Concorrente 2</span>
+            <div class="compare-card-price">R$49,90<span>/mês</span></div>
+            <span class="compare-card-sub">ou pague por serviço</span>
+            <div class="compare-divider"></div>
+            <span class="compare-section-label">Serviços avulsos cobrados à parte</span>
+            <ul class="compare-list">
+              <li class="li-extra">Emissão de DAS (mensal!) <span class="extra-price">+ R$6,99</span></li>
+              <li class="li-extra">Verificação status MEI <span class="extra-price">+ R$3,99</span></li>
+              <li class="li-extra">Declaração anual (DASN) <span class="extra-price">+ R$49,90</span></li>
+              <li class="li-extra">Emissão de nota fiscal <span class="extra-price">+ R$80</span></li>
+              <li class="li-extra">Cancelamento do MEI <span class="extra-price">+ R$80</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
       <div class="preco-card reveal">
         <span class="trial-badge">✦ 30 dias grátis para começar</span>
         <div class="price-display">
           <span class="price-main">R$5,90</span>
           <span class="price-period">/mês</span>
           <span class="price-trial">Primeiro mês gratuito, sem cadastrar cartão</span>
-          <span class="price-compare">Uma única multa por atraso pode custar <strong>mais que meses de Clarê</strong>.</span>
         </div>
         <ul class="preco-items">
           <li>Declaração mensal feita pela Clarê</li>
