@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clarê — Seu MEI em dia, pelo WhatsApp</title>
+  <title>Clarê | Seu MEI em dia, pelo WhatsApp</title>
   <meta name="description" content="A Clarê cuida das suas obrigações de MEI pelo WhatsApp. Declaração mensal, boleto do DAS gerado automaticamente e declaração anual. 30 dias grátis, sem cartão." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Clarê — Seu MEI em dia, pelo WhatsApp" />
+  <meta property="og:title" content="Clarê | Seu MEI em dia, pelo WhatsApp" />
   <meta property="og:description" content="Declaração mensal feita por você em 2 minutos e boleto do DAS entregue pronto no seu WhatsApp. Teste 30 dias grátis." />
   <meta property="og:url" content="https://claremei.com.br" />
   <meta property="og:locale" content="pt_BR" />
@@ -21,7 +21,7 @@
     "mainEntity": [
       {"@type": "Question", "name": "Preciso baixar algum aplicativo?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A Clarê funciona 100% dentro do WhatsApp que você já usa. É só salvar o número e mandar um Oi."}},
       {"@type": "Question", "name": "A Clarê é confiável? Meus dados estão seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A Clarê usa seus dados (nome, CNPJ e faturamento informado) apenas para cumprir suas obrigações de MEI. Nada é vendido ou compartilhado."}},
-      {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "R$5,90 por mês — o preço de um cafezinho — com 30 dias grátis para testar, sem cadastrar cartão."}},
+      {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "R$9,90 por mês, o preço de um cafezinho, com 30 dias grátis para testar, sem cadastrar cartão."}},
       {"@type": "Question", "name": "Posso cancelar quando quiser?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Sem fidelidade, sem multa. É só avisar a Clarê no próprio WhatsApp."}}
     ]
   }
@@ -372,6 +372,75 @@
 
     .obrig-warn::before { content: "Sem fazer: "; font-weight: 700; }
 
+    /* DEPOIMENTOS (dentro de Obrigações) */
+    .depoimentos-block { margin-top: 3.5rem; }
+
+    .depoimentos-intro {
+      background: #fff8eb;
+      border: 1px solid #fde8b0;
+      border-left: 4px solid var(--amber);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1.75rem;
+    }
+    .depoimentos-intro strong { color: #5c3f00; }
+    .depoimentos-intro p { font-size: 14px; color: #7a5600; line-height: 1.6; }
+
+    .depoimentos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .depoimento-card {
+      background: var(--chat-bg);
+      border-radius: 18px;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .depoimento-head {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .depoimento-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+
+    .depoimento-nome {
+      font-size: 12.5px; font-weight: 700; color: var(--dark);
+      line-height: 1.2;
+    }
+    .depoimento-nome span {
+      display: block; font-size: 10.5px; font-weight: 500; color: var(--gray);
+      text-transform: none;
+    }
+
+    .depoimento-bubble {
+      background: var(--bubble-in);
+      border-radius: 12px;
+      border-top-left-radius: 4px;
+      padding: 10px 12px;
+      font-size: 13px; line-height: 1.55; color: var(--dark);
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+
+    .depoimento-consequencia {
+      display: flex; align-items: flex-start; gap: 6px;
+      font-size: 12px; color: #9a1f1f;
+      background: #fdecec;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
     /* PROBLEMA */
     .problema { background: var(--cream); border-top: 1px solid var(--border); }
 
@@ -401,6 +470,8 @@
     .stat-card.stat-warn .stat-num { color: var(--amber); }
 
     .stat-desc { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+    .stat-source { display: block; font-size: 11px; color: #9CA3AF; margin-top: 8px; }
 
     .consequence-box {
       margin-top: 2rem;
@@ -466,6 +537,68 @@
       background: var(--amber-light);
       padding: 3px 10px; border-radius: 999px;
       margin-top: 8px; font-weight: 500;
+    }
+
+    /* VEM POR AÍ */
+    .roadmap {
+      background:
+        radial-gradient(ellipse 70% 55% at 90% 0%, rgba(245,166,35,0.16), transparent 60%),
+        linear-gradient(160deg, #0A5748 0%, #0F7360 45%, #1BA882 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roadmap::before {
+      content: '';
+      position: absolute; width: 480px; height: 480px; border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      bottom: -200px; left: -120px;
+    }
+
+    .roadmap .section-label { color: var(--amber); }
+    .roadmap .section-label::before { background: var(--amber); }
+    .roadmap .section-title { color: var(--white); }
+    .roadmap .section-sub { color: rgba(255,255,255,0.75); }
+
+    .roadmap-grid {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.75rem;
+    }
+
+    .roadmap-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.7rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .roadmap-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.13); }
+
+    .roadmap-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(245,166,35,0.2);
+      font-size: 22px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .roadmap-card h3 { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3; }
+
+    .roadmap-desc { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.6; flex: 1; }
+
+    .roadmap-tag {
+      display: inline-flex; align-self: flex-start; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.6px; text-transform: uppercase;
+      color: var(--dark);
+      background: var(--amber);
+      padding: 4px 11px; border-radius: 999px;
+      box-shadow: 0 3px 12px rgba(245,166,35,0.4);
     }
 
     /* PREÇO */
@@ -773,7 +906,10 @@
       <span class="nav-logo-text">CLARÊ</span>
     </a>
     <div class="nav-links">
-      <a href="#como-funciona" class="nav-anchor">Como funciona</a>
+      <a href="#obrigacoes" class="nav-anchor">Obrigações do MEI</a>
+      <a href="#problema" class="nav-anchor">Pontos de dor</a>
+      <a href="#como-funciona" class="nav-anchor">Solução</a>
+      <a href="#vem-ai" class="nav-anchor">Evolução futura</a>
       <a href="#preco" class="nav-anchor">Preço</a>
       <a href="#faq" class="nav-anchor">Dúvidas</a>
       <a href="https://wa.me/5521966850677?text=Oi!" class="nav-cta" target="_blank" rel="noopener">
@@ -856,7 +992,7 @@
   </section>
 
   <!-- OBRIGAÇÕES -->
-  <section class="obrigacoes">
+  <section class="obrigacoes" id="obrigacoes">
     <div class="container">
       <p class="section-label reveal">Suas obrigações como MEI</p>
       <h2 class="section-title reveal">Ser MEI tem 3 obrigações com o governo</h2>
@@ -904,28 +1040,74 @@
         </div>
 
       </div>
+
+      <!-- DEPOIMENTOS -->
+      <div class="depoimentos-block">
+        <div class="depoimentos-intro reveal">
+          <strong>Isso não é só multa no papel.</strong>
+          <p>Ficar com o MEI desregularizado tem consequência real na vida. A gente ouviu de perto o que aconteceu com alguns MEIs que deixaram passar. Depoimentos reais, nomes preservados.</p>
+        </div>
+
+        <div class="depoimentos-grid">
+
+          <div class="depoimento-card reveal">
+            <div class="depoimento-head">
+              <div class="depoimento-avatar" aria-hidden="true">💃</div>
+              <div class="depoimento-nome">MEI Dançarina<span>Depoimento real, nome preservado</span></div>
+            </div>
+            <div class="depoimento-bubble">
+              "Fiquei grávida e só depois vi que tinha boletos do MEI em aberto. Na hora de pedir o auxílio-maternidade do INSS, o benefício foi negado. Passei a gravidez inteira sem essa proteção."
+            </div>
+            <div class="depoimento-consequencia">⚠️ Perdeu o auxílio-maternidade do INSS</div>
+          </div>
+
+          <div class="depoimento-card reveal">
+            <div class="depoimento-head">
+              <div class="depoimento-avatar" aria-hidden="true">🧱</div>
+              <div class="depoimento-nome">MEI Pedreiro<span>Depoimento real, nome preservado</span></div>
+            </div>
+            <div class="depoimento-bubble">
+              "Fiquei alguns meses sem pagar o DAS e nem vi problema nisso. Quando fui financiar minha casa própria, o banco consultou meu CPF, viu a dívida ativa e travou o crédito. Atrasou um sonho da minha família."
+            </div>
+            <div class="depoimento-consequencia">⚠️ Financiamento da casa própria travado</div>
+          </div>
+
+          <div class="depoimento-card reveal">
+            <div class="depoimento-head">
+              <div class="depoimento-avatar" aria-hidden="true">✂️</div>
+              <div class="depoimento-nome">MEI Barbeiro<span>Depoimento real, nome preservado</span></div>
+            </div>
+            <div class="depoimento-bubble">
+              "Passei anos sem pagar as guias, achando que não tinha punição nenhuma. Um dia o Governo cancelou minha inscrição de MEI e jogou tudo em dívida ativa. Foi uma dor de cabeça enorme pra regularizar, e fiquei sem cobertura nesse meio tempo."
+            </div>
+            <div class="depoimento-consequencia">⚠️ MEI cancelado + dívida ativa com o governo</div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- PROBLEMA -->
-  <section class="problema">
+  <section class="problema" id="problema">
     <div class="container">
       <p class="section-label reveal">O problema</p>
       <h2 class="section-title reveal">A maioria dos MEIs não está conseguindo cumprir</h2>
-      <p class="section-sub reveal">Não é falta de vontade. É que ninguém avisa, ninguém explica e o processo não é simples.</p>
+      <p class="section-sub reveal">Não é falta de vontade. É que ninguém avisa, ninguém explica de um jeito simples. É exatamente esse o papel da Clarê: ensinar o MEI a cuidar do próprio negócio, sem economês e sem complicação.</p>
 
       <div class="stats-grid">
         <div class="stat-card reveal">
           <div class="stat-num">40%</div>
-          <p class="stat-desc">dos MEIs no Brasil estão inadimplentes. Recorde histórico em 2025.</p>
+          <p class="stat-desc">dos MEIs no Brasil estão inadimplentes. Recorde histórico em 2025.<span class="stat-source">Fonte: Contábeis</span></p>
         </div>
         <div class="stat-card stat-warn reveal">
           <div class="stat-num">49%</div>
-          <p class="stat-desc">dos MEIs não sabem o que acontece quando param de pagar o DAS (boleto mensal do MEI).</p>
+          <p class="stat-desc">dos MEIs não sabem o que acontece quando param de pagar o DAS (boleto mensal do MEI).<span class="stat-source">Fonte: Sebrae</span></p>
         </div>
         <div class="stat-card reveal">
           <div class="stat-num">87%</div>
-          <p class="stat-desc">esquecem de fazer a declaração anual dentro do prazo.</p>
+          <p class="stat-desc">esquecem de fazer a declaração anual dentro do prazo.<span class="stat-source">Fonte: Receita Federal/Sebrae</span></p>
         </div>
       </div>
 
@@ -945,7 +1127,7 @@
   <section class="como-funciona" id="como-funciona">
     <div class="container">
       <p class="section-label reveal">Como funciona</p>
-      <h2 class="section-title reveal">Simples como mandar uma mensagem</h2>
+      <h2 class="section-title reveal">É aqui que a Clarê entra em ação</h2>
       <p class="section-sub reveal">Sem baixar aplicativo, sem entrar em site do governo. A Clarê cuida de tudo pelo WhatsApp que você já usa.</p>
 
       <div class="steps">
@@ -993,7 +1175,6 @@
             <span class="step-tag">Pagamento do DAS</span>
             <h3>A Clarê gera o boleto do DAS por você automaticamente</h3>
             <p>A partir do dia 15, a Clarê te avisa que o DAS vence no dia 20 e gera o boleto por você. Você recebe o PDF pronto para pagar pelo Pix ou código de barras, sem precisar entrar em nenhum site. Se não pagar, ela te lembra nos dias 17, 19 e 20.</p>
-            <span class="step-future">✦ Em breve: pagamento via Pix Automático com sua autorização</span>
           </div>
         </div>
 
@@ -1005,8 +1186,7 @@
           <div class="step-content">
             <span class="step-tag">Declaração anual</span>
             <h3>Lembrete e orientação da declaração anual (DASN-SIMEI)</h3>
-            <p>A Clarê já registra o faturamento de cada mês. Em breve, vai te avisar quando chegar abril/maio e te guiar passo a passo para fazer a Declaração Anual (DASN-SIMEI) sem precisar se lembrar do prazo.</p>
-            <span class="step-future">✦ Em breve: geração automática da DASN-SIMEI</span>
+            <p>Quando chegar o período entre março e maio, a Clarê te avisa e te dá o passo a passo certinho para você preencher e enviar a Declaração Anual (DASN-SIMEI) sem dificuldade nenhuma, sem precisar se lembrar do prazo nem se perder no site do governo.</p>
           </div>
         </div>
 
@@ -1021,6 +1201,54 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- VEM POR AÍ -->
+  <section class="roadmap" id="vem-ai">
+    <div class="container">
+      <p class="section-label reveal">Vem por aí</p>
+      <h2 class="section-title reveal">A Clarê está só começando</h2>
+      <p class="section-sub reveal">Estamos construindo novidades pra deixar o seu MEI ainda mais tranquilo. Quando chegarem, você é avisado em primeira mão, no próprio WhatsApp.</p>
+
+      <div class="roadmap-grid">
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">⚡</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Pix Automático pro DAS</h3>
+          <p class="roadmap-desc">Autoriza uma vez e a Clarê paga o DAS por você todo mês, sem precisar abrir o boleto na mão.</p>
+        </div>
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">🧾</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Emissão de Nota Fiscal assistida</h3>
+          <p class="roadmap-desc">A Clarê te ajuda a montar sua nota fiscal de serviço com o código certo, prontinha pra você só colar no portal do governo.</p>
+        </div>
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">🔍</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Faxina Fiscal automática</h3>
+          <p class="roadmap-desc">A Clarê passa a olhar seu CNPJ todo mês por conta própria e te avisa antes de qualquer pendência virar problema.</p>
+        </div>
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">🙋</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Regularização assistida</h3>
+          <p class="roadmap-desc">Se o MEI quiser regularizar de vez, é só acionar o atendimento. Um time de verdade entra em ação e cuida do processo com você.</p>
+        </div>
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">🎓</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Declaração Anual 100% pela Clarê</h3>
+          <p class="roadmap-desc">Em vez de só te dar o passo a passo, a Clarê calcula e entrega a DASN-SIMEI por você, do início ao fim.</p>
+        </div>
+        <div class="roadmap-card reveal">
+          <div class="roadmap-icon" aria-hidden="true">📰</div>
+          <span class="roadmap-tag">Em breve</span>
+          <h3>Newsletter semanal personalizada</h3>
+          <p class="roadmap-desc">Toda semana no seu WhatsApp: educação financeira, dicas pra não cair em pegadinhas do MEI e oportunidades da sua região, como feiras, cursos e licitações abertas, pensadas pra sua geografia e seu tipo de negócio.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1057,16 +1285,17 @@
           <div class="compare-card compare-clare-card">
             <div class="compare-best-badge">✦ Melhor escolha</div>
             <span class="compare-card-name">Clarê</span>
-            <div class="compare-card-price">R$5,90<span>/mês</span></div>
+            <div class="compare-card-price">R$9,90<span>/mês</span></div>
             <span class="compare-card-sub">Direto no WhatsApp. Sem surpresas.</span>
             <div class="compare-divider"></div>
             <span class="compare-section-label">Tudo incluído, sem cobranças à parte</span>
             <ul class="compare-list">
-              <li class="li-clare">✓ Boleto DAS gerado todo mês</li>
-              <li class="li-clare">✓ Declaração mensal feita por você</li>
-              <li class="li-clare">✓ Lembretes D-5, D-1 e D-day</li>
-              <li class="li-clare">✓ Suporte a dúvidas sobre MEI</li>
-              <li class="li-no-extra">Zero cobranças avulsas</li>
+              <li class="li-clare">✓ Declaração Mensal de Faturamento feita para você</li>
+              <li class="li-clare">✓ Boleto DAS emitido e enviado no seu WhatsApp</li>
+              <li class="li-clare">✓ Assistência passo a passo para a declaração anual</li>
+              <li class="li-clare">✓ Lembretes automáticos 5, 3 e 1 dia antes</li>
+              <li class="li-clare">✓ Suporte a dúvidas via FAQ</li>
+              <li class="li-no-extra">Zero cobranças avulsas ou surpresas!</li>
             </ul>
           </div>
 
@@ -1107,27 +1336,22 @@
 
         <details class="faq-item reveal">
           <summary>A Clarê é confiável? Meus dados estão seguros?</summary>
-          <p class="faq-answer">Sim. A Clarê usa seus dados (nome, CNPJ e o faturamento que você informa) apenas para cuidar das suas obrigações de MEI. Nada é vendido nem compartilhado com terceiros.</p>
+          <p class="faq-answer">Sim. A Clarê usa seus dados (nome, CNPJ e o faturamento que você informa) apenas para cuidar das suas obrigações de MEI. Nada é vendido nem compartilhado com terceiros. Os detalhes estão na nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
         </details>
 
         <details class="faq-item reveal">
           <summary>A Clarê serve para qualquer MEI?</summary>
-          <p class="faq-answer">Sim. Serviço, comércio ou indústria — as obrigações são as mesmas e a Clarê cuida de todas. No cadastro ela pergunta sua categoria para personalizar a ajuda.</p>
+          <p class="faq-answer">Sim. Serviço, comércio ou indústria: as obrigações são as mesmas e a Clarê cuida de todas. No cadastro ela pergunta sua categoria para personalizar a ajuda.</p>
         </details>
 
         <details class="faq-item reveal">
           <summary>Como funciona o pagamento da Clarê?</summary>
-          <p class="faq-answer">Os primeiros 30 dias são grátis, sem cadastrar cartão. Depois, a Clarê pergunta se foi útil e combina com você o pagamento de R$5,90 por mês — o preço de um cafezinho — direto no WhatsApp.</p>
+          <p class="faq-answer">Os primeiros 30 dias são grátis, sem cadastrar cartão. Depois, a Clarê pergunta se foi útil e combina com você o pagamento de R$9,90 por mês, o preço de um cafezinho, direto no WhatsApp.</p>
         </details>
 
         <details class="faq-item reveal">
           <summary>Posso cancelar quando quiser?</summary>
           <p class="faq-answer">Pode. Sem fidelidade, sem multa, sem burocracia. É só avisar a Clarê na própria conversa.</p>
-        </details>
-
-        <details class="faq-item reveal">
-          <summary>E se eu já estiver com o MEI atrasado?</summary>
-          <p class="faq-answer">A Clarê te orienta a regularizar. Ela avisa quando há débitos antigos e te indica o caminho oficial para parcelar e voltar a ficar em dia.</p>
         </details>
 
       </div>
@@ -1151,7 +1375,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p><strong>Clarê</strong> — Assistente de MEI no WhatsApp</p>
+    <p><strong>Clarê</strong> | Assistente de MEI no WhatsApp</p>
     <p style="margin-top: 6px;">Feito para quem trabalha de verdade.</p>
     <p style="margin-top: 12px;">
       <a href="politica-de-privacidade.html">Política de Privacidade</a>
