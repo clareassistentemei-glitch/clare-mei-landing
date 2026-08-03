@@ -21,7 +21,7 @@
     "mainEntity": [
       {"@type": "Question", "name": "Preciso baixar algum aplicativo?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A Clarê funciona 100% dentro do WhatsApp que você já usa. É só salvar o número e mandar um Oi."}},
       {"@type": "Question", "name": "A Clarê é confiável? Meus dados estão seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A Clarê usa seus dados (nome, CNPJ e faturamento informado) apenas para cumprir suas obrigações de MEI. Nada é vendido ou compartilhado."}},
-      {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "R$9,90 por mês, o preço de um cafezinho, com 30 dias grátis para testar, sem cadastrar cartão."}},
+      {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "A Clarê está em fase de testes, focada em coletar feedback dos nossos clientes — por isso, o custo hoje é zero."}},
       {"@type": "Question", "name": "Posso cancelar quando quiser?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Sem fidelidade, sem multa. É só avisar a Clarê no próprio WhatsApp."}}
     ]
   }
@@ -380,7 +380,7 @@
       border: 1px solid #fde8b0;
       border-left: 4px solid var(--amber);
       border-radius: 14px;
-      padding: 1.1rem 1.4rem;
+      padding: 1.5rem 1.6rem;
       margin-bottom: 1.75rem;
     }
     .depoimentos-intro strong { color: #5c3f00; }
@@ -395,10 +395,10 @@
     .depoimento-card {
       background: var(--chat-bg);
       border-radius: 18px;
-      padding: 1.1rem;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .depoimento-head {
@@ -429,6 +429,7 @@
       padding: 10px 12px;
       font-size: 13px; line-height: 1.55; color: var(--dark);
       box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+      flex: 1;
     }
 
     .depoimento-consequencia {
@@ -785,8 +786,8 @@
     .compare-grid {
       display: grid;
       grid-template-columns: 1fr 1.12fr 1fr;
-      gap: 1rem;
-      align-items: start;
+      gap: 1.5rem;
+      align-items: stretch;
     }
 
     @media (max-width: 680px) {
@@ -796,9 +797,13 @@
 
     .compare-card {
       border-radius: 20px;
-      padding: 1.5rem 1.2rem;
+      padding: 1.5rem;
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
+
+    .compare-card .compare-list { flex: 1; }
 
     .compare-other {
       background: var(--cream);
@@ -1232,10 +1237,10 @@
           <p class="roadmap-desc">A Clarê passa a olhar seu CNPJ todo mês por conta própria e te avisa antes de qualquer pendência virar problema.</p>
         </div>
         <div class="roadmap-card reveal">
-          <div class="roadmap-icon" aria-hidden="true">🙋</div>
+          <div class="roadmap-icon" aria-hidden="true">📅</div>
           <span class="roadmap-tag">Em breve</span>
-          <h3>Regularização assistida</h3>
-          <p class="roadmap-desc">Se o MEI quiser regularizar de vez, é só acionar o atendimento. Um time de verdade entra em ação e cuida do processo com você.</p>
+          <h3>Fechamento do mês</h3>
+          <p class="roadmap-desc">No fim de cada mês, a Clarê manda um resumo do que já cuidou pra você e do que ainda precisa da sua atenção.</p>
         </div>
         <div class="roadmap-card reveal">
           <div class="roadmap-icon" aria-hidden="true">🎓</div>
@@ -1257,8 +1262,8 @@
   <section class="preco" id="preco">
     <div class="container">
       <p class="section-label reveal" style="text-align:center;">Preço</p>
-      <h2 class="section-title reveal" style="text-align:center;">O preço de um cafezinho por mês</h2>
-      <p class="section-sub reveal" style="text-align:center; margin: 0 auto;">Teste por 30 dias de graça antes de pagar qualquer coisa.</p>
+      <h2 class="section-title reveal" style="text-align:center;">Grátis durante a fase de testes</h2>
+      <p class="section-sub reveal" style="text-align:center; margin: 0 auto;">Estamos coletando feedback dos primeiros usuários — por isso, por enquanto, o custo pra você é zero.</p>
 
       <!-- COMPARAÇÃO CONCORRENTES -->
       <div class="compare-section reveal">
@@ -1285,7 +1290,7 @@
           <div class="compare-card compare-clare-card">
             <div class="compare-best-badge">✦ Melhor escolha</div>
             <span class="compare-card-name">Clarê</span>
-            <div class="compare-card-price">R$9,90<span>/mês</span></div>
+            <div class="compare-card-price">Grátis<span> · fase de testes</span></div>
             <span class="compare-card-sub">Direto no WhatsApp. Sem surpresas.</span>
             <div class="compare-divider"></div>
             <span class="compare-section-label">Tudo incluído, sem cobranças à parte</span>
@@ -1318,6 +1323,30 @@
         </div>
       </div>
 
+      <!-- CARD DE PREÇO + CTA -->
+      <div class="preco-card reveal">
+        <span class="trial-badge">✦ Grátis durante a fase de testes</span>
+        <div class="price-display">
+          <span class="price-main">R$0</span><span class="price-period">por enquanto</span>
+          <span class="price-trial">Estamos coletando feedback dos primeiros usuários — sem cadastrar cartão</span>
+          <span class="price-compare">Outros serviços de MEI cobram de <strong>R$29,90 a R$49,90</strong> por mês, com extras à parte.</span>
+        </div>
+        <ul class="preco-items">
+          <li>Declaração Mensal de Faturamento feita para você</li>
+          <li>Boleto do DAS gerado e enviado no WhatsApp</li>
+          <li>Passo a passo da Declaração Anual (DASN-SIMEI)</li>
+          <li>Lembretes automáticos antes de cada prazo</li>
+          <li>Dúvidas respondidas na hora, sem sair da conversa</li>
+        </ul>
+        <a href="https://wa.me/5521966850677?text=Oi!" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Começar agora, de graça
+        </a>
+        <p class="preco-note">Sem fidelidade e sem multa. Cancela quando quiser, pelo WhatsApp.</p>
+      </div>
+
     </div>
   </section>
 
@@ -1346,7 +1375,7 @@
 
         <details class="faq-item reveal">
           <summary>Como funciona o pagamento da Clarê?</summary>
-          <p class="faq-answer">Os primeiros 30 dias são grátis, sem cadastrar cartão. Depois, a Clarê pergunta se foi útil e combina com você o pagamento de R$9,90 por mês, o preço de um cafezinho, direto no WhatsApp.</p>
+          <p class="faq-answer">Hoje não tem pagamento. A Clarê está em fase de testes, focada em coletar feedback dos nossos clientes — por isso, o custo pra você é zero. Se isso mudar no futuro, avisamos com antecedência.</p>
         </details>
 
         <details class="faq-item reveal">
